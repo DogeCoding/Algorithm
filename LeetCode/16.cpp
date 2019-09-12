@@ -13,31 +13,25 @@
 
 using namespace std;
 
-vector<vector<int> > threeSum(vector<int>& nums) {
-	vector<vector<int> > res;
-	std::sort(nums.begin(), nums.end());
-
-	for (int i = 0; i < nums.size(); i++) {
-		int target = -nums[i];
-		int front = i + 1, back = nums.size() - 1;
-		while (front < back) {
-			if (nums[front] + nums[back] < target) {
-				front++;
-			} else if (nums[front] + nums[back] > target) {
-				back--;
-			} else {
-				vector<int> triplet(3, 0);
-				triplet[0] = nums[i];
-				triplet[1] = nums[front];
-				triplet[2] = nums[back];
-				res.push_back(triplet);
-				while(front < back && nums[front] == triplet[1]) front++;
-				while(front < back && nums[back] == triplet[2]) back--;
+int threeSumClosest(vector<int>& nums, int target) {
+	if (nums.size() < 3) return 0;
+	int closest = nums[0] + nums[1] + nums[2];
+	sort(nums.begin(), nums.end());
+	for (int i = 0; i < nums.size() - 2; i++) {
+		if (i > 0 && nums[i] == nums[i+1]) continue;
+		int left = i+1, right = nums.size() - 1;
+		while (left < right) {
+			if (nums[i] + nums[left] + nums[right] == target) {
+				return target;
 			}
+			if (abs(nums[i]+nums[left]+nums[right]-target) < abs(closest-target)) {
+				closest = nums[i]+nums[left]+nums[right];
+			}
+			if (nums[i]+nums[left]+nums[right] > target) --right;
+			else ++left;
 		}
-		while(i + 1 < nums.size() && nums[i + 1] == nums[i]) i++;
-	}
-	return res;
+	} 
+	return closest;       
 }
 
 int main(int argc, char const *argv[])
