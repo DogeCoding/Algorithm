@@ -46,6 +46,25 @@ bool valid(string str) {
 	return (balance == 0);
 }
 
+void backTrack(vector<string> &results, string &comnination, int open, int close, int length);
+vector<string> generateParenthesis(int n) {
+	vector<string> ans;
+	backTrack(ans, "", 0, 0, n);
+	return ans;
+}
+
+void backTrack(vector<string> &results, string &comnination, int open, int close, int length) {
+	if (combination.length() == 2 * length) results.push_back(combination);
+	if (open < length) {
+		string temp = combination + "(";
+		backTrack(results, temp, open + 1, close, length);
+	}
+	if (close < open) {
+		string temp = combination + ")";
+		backTrack(results, temp, open, close + 1, length);
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	
