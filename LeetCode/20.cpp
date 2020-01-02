@@ -13,49 +13,28 @@
 using namespace std;
 
 bool isValid(string s) {
-    unordered_map<char, int> map;
-    for (int i = 0; i < s.length(); i++) {
-        switch (s[i]) {
-            case ')': {
-                if (map.find('(') == map.end())
-                    return false;
-                else 
-                    map['(']--;
-                break;
-            }
-            case '}': {
-                if (map.find('{') == map.end())
-                    return false;
-                else
-                    map['{']--;
-                break;
-            }
-            case ']': {
-                if (map.find('[') == map.end())
-                    return false;
-                else 
-                    map['[']--;
-                break;
-            }
-            default: {
-                if (map.find(s[i]) == map.end()) {
-                    map[s[i]] = 1;
-                } else {
-                    map[s[i]]++;
-                }
-            }
-        } 
-    }
-    cout << "yfk" << endl;
-    cout << map['('] << "k" << endl;
-    for (unordered_map<char, int>::iterator i = map.begin(); i != map.end(); i++){
-        if (i->second != 0)
-            return false;
-    }
-    return true;
+    stack<char> st;
+    for (char &c : s) {
+        if (c == ')' || c == ']' || c == '}') {
+            cout << c << " " << st.top() << endl;
+            cout << (c-1 || c-2) << endl;
+            if (st.empty()) return false;
+            if (st.top() != c-1 && st.top() != c-2) return false;
+            st.pop();
+        } else {
+            st.push(c);
+        }
+    } 
+    return st.empty();
 }
 
 int main(int argc, char const *argv[]) {
 	cout << isValid("()") << endl;
+    // cout << ((int)'(') << endl;
+    // cout << ((int)')') << endl;
+    // cout << ((int)'[') << endl;
+    // cout << ((int)']') << endl;
+    // cout << ((int)'{') << endl;
+    // cout << ((int)'}') << endl;
 	return 0;
 }
