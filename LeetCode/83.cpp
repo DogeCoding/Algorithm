@@ -29,8 +29,27 @@ ListNode* creatList(int *list, int length) {
 	return ans->next;
 }
 
+ListNode* deleteDuplicates(ListNode* head) {
+	if (!head) return head;
+	ListNode *ans = head;
+	while (head) {
+		cout << head->val << "   " << head->next->val << endl;
+		if (head->val == head->next->val) {
+			head->next = head->next->next;
+		}
+		head = head->next;
+	}
+	return ans;
+}
+
 int main(int argc, char const *argv[])
 {
-	
+	int a[5] = {1,1,2};
+	ListNode *head = creatList(a, 3);
+	ListNode *temp = deleteDuplicates(head);
+	while (temp) {
+		cout << temp->val << endl;
+		temp = temp->next;
+	}
 	return 0;
 }
