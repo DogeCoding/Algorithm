@@ -29,28 +29,30 @@ ListNode* creatList(int *list, int length) {
 	return ans->next;
 }
 
-ListNode* deleteDuplicates(ListNode* head) {
-	if (!head) return head;
-	ListNode *ans = head;
-	while (head && head->next) {
-		cout << head->val << "   " << head->next->val << endl;
-		if (head->val == head->next->val) {
-			head->next = head->next->next;
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+	if (!n) return;
+	int k = 0;
+	for (int i = 0; i < m + n; i++) {
+		if (i >= m && nums1[i] == 0) {
+			nums1[i] = nums2[k++];
+		} else if (nums1[i] < nums2[k]) {
 		} else {
-			head = head->next;
+			int temp = nums1[i];
+			nums1[i] = nums2[k];
+			nums2[k] = temp;
 		}
+		cout << nums1[i] << "  " << nums2[k] << endl;
 	}
-	return ans;
 }
 
 int main(int argc, char const *argv[])
 {
-	int a[5] = {1,1,2};
-	ListNode *head = creatList(a, 3);
-	ListNode *temp = deleteDuplicates(head);
-	while (temp) {
-		cout << temp->val << endl;
-		temp = temp->next;
+	vector<int> nums1 = {4,5,6,0,0,0};
+	vector<int> nums2 = {1,2,3};
+	merge(nums1, 3, nums2, 3);
+	for (int i = 0; i < 6; i++) {
+		cout << "  " << nums1[i];
 	}
+	cout << endl;
 	return 0;
 }
