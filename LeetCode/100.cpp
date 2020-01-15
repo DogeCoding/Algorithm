@@ -29,37 +29,29 @@ ListNode* creatList(int *list, int length) {
 	return ans->next;
 }
 
-void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-	if (!n) return;
-	int tm = m, tn = n;
-	vector<int> ans(n+m);
-	int i = 0;
-	while (tm && tn) {
-		if (nums1[m-tm] < nums2[n-tn]) {
-			ans[i++] = nums1[m-tm];
-			tm--;
-		} else {
-			ans[i++] = nums2[n-tn];
-			tn--;
+struct TreeNode {
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+bool isSameTree(TreeNode* p, TreeNode* q) {
+	if (p->val == q->val) {
+		if (p->left && q->left) {
+			return isSameTree(p->left, q->left);
 		}
+		if (p->right && q->right) {
+			return isSameTree(p->right, q->right);
+		}
+		return true;
+	} else {
+		return false;
 	}
-	while (tm) {
-		ans[i++] = nums1[m-tm--];
-	}
-	while (tn) {
-		ans[i++] = nums2[n-tn--];
-	}
-	nums1 = ans;
 }
 
 int main(int argc, char const *argv[])
 {
-	vector<int> nums1 = {4,5,6,0,0,0};
-	vector<int> nums2 = {1,2,3};
-	merge(nums1, 3, nums2, 3);
-	for (int i = 0; i < 6; i++) {
-		cout << "  " << nums1[i];
-	}
-	cout << endl;
+	
 	return 0;
 }
