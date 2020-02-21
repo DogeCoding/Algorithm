@@ -36,6 +36,11 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+int maxDepth(TreeNode* root) {
+	if (!root) return 0;
+	return 1+max(maxDepth(root->left), maxDepth(root->right), less<int>());
+}
+
 int main(int argc, char const *argv[])
 {
 	
