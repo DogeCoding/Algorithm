@@ -36,6 +36,22 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) {
+	if (!matrix.size() || !matrix[0].size()) return false;
+	int width = matrix[0].size();
+	int length = matrix.size();
+	for (int i = length - 1; i >= 0; i--) {
+		if (target == matrix[i][0]) return true;
+		if (target > matrix[i][0]) {
+			for (int j = 1; j < width; j++) {
+				if (target == matrix[i][j]) return true;
+				if (target < matrix[i][j]) break;
+			}
+		}
+	}
+	return false;
+}
+
 int main(int argc, char const *argv[])
 {
 	

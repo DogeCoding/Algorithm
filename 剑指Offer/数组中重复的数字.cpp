@@ -36,6 +36,28 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+int findRepeatNumber(vector<int>& nums) {
+	if (!nums.size()) return 0;
+	sort(nums.begin(), nums.end());
+	int prev = nums[0];
+	for (int i = 1; i < nums.size(); i++) {
+		if (nums[i] == prev) {
+			return prev;
+		}
+		prev = nums[i];
+	}
+	return 0;
+}
+
+int findRepeatNumber(vector<int>& nums) {
+    unordered_map<int,int>m;
+    for(int i=0;i<nums.size();i++){
+        if(++m[nums[i]]>1) return nums[i];
+    }
+    return 0;
+}
+    
+
 int main(int argc, char const *argv[])
 {
 	

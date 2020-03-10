@@ -36,6 +36,20 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+bool hasCycle(ListNode *head) {
+	ListNode *point1 = head, *point2 = head;
+	while (point1 && point2) {
+		point2 = point2->next;
+		if (!point2) return false;
+		point2 = point2->next;
+		if (!point2) return false;
+		point1 = point1->next;
+		if (point1 == point2) return true;
+	}
+	return false;
+
+}
+
 int main(int argc, char const *argv[])
 {
 	

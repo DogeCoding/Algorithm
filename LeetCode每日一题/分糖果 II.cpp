@@ -36,6 +36,17 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+vector<int> distributeCandies(int candies, int num_people) {
+	vector<int> ans(num_people, 0);
+	int i = 0;
+	while (candies) {
+		ans[i % num_people] += min(candies, i + 1);
+		candies -= min(candies, i + 1);
+		i++;
+	}
+	return ans;
+}
+
 int main(int argc, char const *argv[])
 {
 	

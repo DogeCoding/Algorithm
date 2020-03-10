@@ -36,6 +36,25 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+int coinChange(vector<int>& coins, int amount) {
+	if (amount <= 0 || !coins.size()) return 0;
+	sort(coins.begin(), coins.end());
+	int ans = 0;
+	int target = amount;
+	for (int i = coins.size() - 1; i >= 0; i--) {
+		ans = target / coins[i];
+		target = target % coins[i];
+		if (!target) return ans;
+		for (int j = i - 1; j >= 0; j--) {
+			ans += target / coins[j];
+			target = target % coins[j];
+			if (!target) return ans;
+		}
+	}
+	if (target != 0) return -1;
+	return ans;
+}
+
 int main(int argc, char const *argv[])
 {
 	
