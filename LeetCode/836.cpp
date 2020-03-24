@@ -36,23 +36,17 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-string replaceSpace(string s) {
-	vector<char> str;
-	for (auto &c : s) {
-		if (c != ' ') {
-			str.push_back(c);
-		} else {
-			str.push_back('%');
-			str.push_back('2');
-			str.push_back('0');
-		}
-	}
-	string ans(str.begin(), str.end());
-	return ans;
+bool isRectangleOverlap(vector<int>& rec1, vector<int>& rec2) {
+    return !(rec1[2] <= rec2[0] ||   // left
+             rec1[3] <= rec2[1] ||   // bottom
+             rec1[0] >= rec2[2] ||   // right
+             rec1[1] >= rec2[3]);    // top
 }
 
 int main(int argc, char const *argv[])
 {
-	
+	vector<int> rec1 = {0,0,2,2};
+	vector<int> rec2 = {1,1,3,3};
+	cout << isRectangleOverlap(rec1, rec2) << endl;
 	return 0;
 }

@@ -36,19 +36,20 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-string replaceSpace(string s) {
-	vector<char> str;
-	for (auto &c : s) {
-		if (c != ' ') {
-			str.push_back(c);
+ListNode* middleNode(ListNode* head) {
+	ListNode *one = head, *two = head;
+	while (two) {
+		if (two->next) {
+			one = one->next;
+			two = two->next;
+		}
+		if (two->next) {
+			two = two->next;
 		} else {
-			str.push_back('%');
-			str.push_back('2');
-			str.push_back('0');
+			break;
 		}
 	}
-	string ans(str.begin(), str.end());
-	return ans;
+	return one;
 }
 
 int main(int argc, char const *argv[])

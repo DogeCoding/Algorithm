@@ -36,21 +36,6 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-string replaceSpace(string s) {
-	vector<char> str;
-	for (auto &c : s) {
-		if (c != ' ') {
-			str.push_back(c);
-		} else {
-			str.push_back('%');
-			str.push_back('2');
-			str.push_back('0');
-		}
-	}
-	string ans(str.begin(), str.end());
-	return ans;
-}
-
 int main(int argc, char const *argv[])
 {
 	
