@@ -10,7 +10,6 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <list>
 
 using namespace std;
 
@@ -36,6 +35,33 @@ struct TreeNode {
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+int longestConsecutive(vector<int>& nums) {
+	if (!nums.size()) return 0;
+	int temp = 1;
+	int ans = 1;
+	map<int, int> sortMap;
+	for (int i = 0; i < nums.size(); i++) {
+		sortMap[nums[i]] = 1;
+	}
+	bool first = true;
+	int cmp = 0;
+	for (map<int, int>::iterator i = sortMap.begin(); i != sortMap.end(); ++i) {
+		if (first) {
+			cmp = i->first;
+			first = false;
+			continue;
+		}
+		if (i->first - cmp == 1) {
+			temp++;
+			ans = max(ans, temp);
+		} else {
+			temp = 1;
+		}
+		cmp = i->first;
+	}
+	return ans;
+}
 
 int main(int argc, char const *argv[])
 {

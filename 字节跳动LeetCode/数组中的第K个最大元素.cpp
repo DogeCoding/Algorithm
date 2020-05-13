@@ -10,7 +10,6 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <list>
 
 using namespace std;
 
@@ -36,6 +35,18 @@ struct TreeNode {
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+int findLengthOfLCIS(vector<int>& nums) {
+	if (!nums.size()) return 0;
+	vector<int> dp(nums.size(), 0);
+	dp[0] = 1;
+	int ans = 1;
+	for (int i = 1; i < nums.size(); i++) {
+		dp[i] = nums[i] > nums[i-1] ? dp[i-1] + 1 : 1;
+		ans = max(dp[i], ans);
+	}
+	return ans;
+}
 
 int main(int argc, char const *argv[])
 {

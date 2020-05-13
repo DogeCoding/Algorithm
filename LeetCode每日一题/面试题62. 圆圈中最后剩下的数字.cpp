@@ -10,7 +10,6 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <list>
 
 using namespace std;
 
@@ -37,8 +36,27 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+// int lastRemaining(int n, int m) {
+// 	vector <int> num;
+// 	for (int i = 0; i < n; i++) num.push_back(i);
+// 	int idx = 0;
+// 	while(num.size() > 1) {
+// 		idx = (idx + m - 1) % num.size();
+// 		num.erase(num.begin() + idx);
+// 	}
+// 	return num[0];
+// }
+
+int lastRemaining(int n, int m) {
+	int idx = 0;
+	for (int i = 2; i <= n; i++) {
+		idx = (idx + m) % i;
+	}
+	return idx;
+}
+
 int main(int argc, char const *argv[])
 {
-	
+	cout << lastRemaining(5, 3) << endl;
 	return 0;
 }

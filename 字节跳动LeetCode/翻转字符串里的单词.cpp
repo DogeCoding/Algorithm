@@ -10,7 +10,7 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <list>
+#include <string>
 
 using namespace std;
 
@@ -37,8 +37,41 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+string reverseWords(string s) {
+	string ans = "";
+	string temp = "";
+	for (int i = 0; i < s.length(); i++) {
+		if (s[i] == ' ') {
+			if (temp != "") {
+				ans = (ans == "" ? temp : temp + " ") + ans;
+				temp = "";
+			}
+		} else {
+			temp.push_back(s[i]);
+		}
+		if (i == s.length() - 1 && temp != "") {
+			ans = (ans == "" ? temp : temp + " ") + ans;
+		} 
+	}
+	return ans;
+}
+
+
 int main(int argc, char const *argv[])
 {
-	
+	cout << reverseWords("the sky is blue") << endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

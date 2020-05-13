@@ -10,7 +10,6 @@
 #include <stack>
 #include <queue>
 #include <unordered_map>
-#include <list>
 
 using namespace std;
 
@@ -36,6 +35,23 @@ struct TreeNode {
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+TreeNode* buildTree(vector<int> &preorder, int pStart, int pEnd, vector<int> &inorder, int iStart, int iEnd) {
+	if (pStart > pEnd || iStart > iEnd) return NULL;
+	TreeNode *root = new TreeNode(preorder[pStart]);
+	int i = iStart;
+	while (inorder[i] != preorder[pStart]) {
+		i++;
+	}
+	int npStart = pStart + 1;
+	root->left = buildTree(preorder, npStart, npStart + i - iStart - 1, inorder, iStart, i - 1);
+	root->right = buildTree(preorder, npStart + i - iStart, pEnd, inorder, i + 1, iEnd);
+	return root;
+}
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+	return buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+}
 
 int main(int argc, char const *argv[])
 {

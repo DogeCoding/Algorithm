@@ -36,20 +36,14 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-ListNode* middleNode(ListNode* head) {
-	ListNode *one = head, *two = head;
-	while (two) {
-		if (two->next) {
-			one = one->next;
-			two = two->next;
-		}
-		if (two->next) {
-			two = two->next;
-		} else {
-			break;
-		}
+vector<int> reversePrint(ListNode* head) {
+	vector<int> ans;
+	while (head) {
+		ans.push_back(head->val);
+		head = head->next;
 	}
-	return one;
+	reverse(ans.begin(), ans.end());
+	return ans;
 }
 
 int main(int argc, char const *argv[])
